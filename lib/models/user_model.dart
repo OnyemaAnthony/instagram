@@ -4,6 +4,7 @@ class UserModel {
   String? password;
   String? id;
   String? email;
+  String? photoUrl;
   List<String>? followers;
   List<String>? followings;
 
@@ -15,6 +16,7 @@ class UserModel {
     this.followers,
     this.followings,
     this.password,
+    this.photoUrl,
   });
 
   Map<String,dynamic>toMap(){
@@ -22,6 +24,7 @@ class UserModel {
     user['userName']= userName;
     user['bio']= bio;
     user['email'] = email;
+    user['photoUrl']= photoUrl;
     user['followers'] = followers;
     user['followings']= followings;
     return user;
@@ -31,6 +34,7 @@ class UserModel {
     userName = user['userName'];
     bio = user['bio'];
     email = user['email'];
+    photoUrl = user['photoUrl'];
     followers = user['followers'];
     followings = user['followings'];
   }

@@ -103,8 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                   Container(
                     child: const Text("Don't have an account?"),),
 
                   Container(
@@ -122,8 +121,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void selectImage()async {
   Uint8List image =  await pickImage(ImageSource.gallery);
-    setState(() {
-      image = _image!;
-    });
+  setState(() {
+    _image = image;
+  });
   }
 }
