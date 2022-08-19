@@ -1,10 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 class PostModel {
   String? descriptions;
   String? id;
   String? userName;
   String? createdAt;
-  List? profileImages;
+  String? profileImage;
   List? likes;
+  String? userId;
   String? postId;
   String? photoUrl;
 
@@ -14,29 +16,32 @@ class PostModel {
     this.postId,
     this.userName,
     this.createdAt,
-    this.profileImages,
+    this.profileImage,
     this.likes,
+    this.userId,
   });
   Map<String,dynamic>toMap(){
     Map<String,dynamic> data = <String,dynamic>{};
-    data['descriptions']= descriptions;
+    data['description']= descriptions;
     data['userName']= userName;
     data['createdAt']= createdAt;
-    data['profileImages']= profileImages;
+    data['profileImages']= profileImage;
     data['likes']= likes;
     data['photoUrl']= photoUrl;
     data['postId']= postId;
+    data['userId'] = userId;
     return data;
   }
 
-  PostModel.fromMap(dynamic data){
-    id = data['id'];
+  PostModel.fromMap(DocumentSnapshot data){
+    id = data.reference.id;
     descriptions = data['descriptions'];
     userName = data['userName'];
     createdAt= data['createdAt'];
-    profileImages = data['profileImages'];
+    profileImage = data['profileImage'];
     likes = data['likes'];
     photoUrl = data['photoUrl'];
     postId = data['postId'];
+    userId = data['userId'];
   }
 }
