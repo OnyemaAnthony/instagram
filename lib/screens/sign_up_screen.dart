@@ -22,6 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController bioController = TextEditingController();
   final TextEditingController userNameController = TextEditingController();
   Uint8List? _image;
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -78,15 +79,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   hintText: 'Bio'),
               const SizedBox(height: 24,),
               GestureDetector(
-                onTap: (){
+                onTap: ()async{
+                  setState(() {
+                    _isLoading = true;
+                  });
                   UserModel user = UserModel(email: emailController.text,
                     password: passwordController.text,
                     bio: bioController.text,
                     userName: userNameController.text,);
-                  AuthMethods().signUpUser(user,_image!);
+                  final res = await AuthMethods().signUpUser(user,_image!);
+                  if(res != 'Success'){
+                    showSnackBar('Something is wrong try again', context);
+                  }else{
+                    setState(() {
+                      _isLoading= false;
+                    });
+                  }
                 },
                 child: Container(
-                  child: const Text('Sign Up'),
+                  child: _isLoading? const Center(child: CircularProgressIndicator(color: primaryColor,),):const Text('Sign Up'),
                   width: double.infinity,
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(vertical: 12),
