@@ -15,3 +15,11 @@ pickImage(ImageSource imageSource)async{
 showSnackBar(String message,BuildContext context){
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
 }
+
+void push(BuildContext context, Widget screen){
+  Navigator.of(context).push(MaterialPageRoute(builder: (_)=>screen));
+}
+
+void pushReplacement(BuildContext context, Widget screen){
+  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>screen));
+}

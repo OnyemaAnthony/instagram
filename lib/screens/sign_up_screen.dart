@@ -5,9 +5,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram/models/user_model.dart';
 import 'package:instagram/resources/auth_methos.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram/screens/web_screen.dart';
 import 'package:instagram/utils/utils.dart';
+import '../responsive/responsive_layout_screen.dart';
 import '../utils/colors.dart';
 import '../widgets/text_field_input.dart';
+import 'mobile_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -94,6 +97,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     setState(() {
                       _isLoading= false;
                     });
+                    pushReplacement(context, const ResponsiveLayoutScreen(mobileScreenLayout: MobileScreen(), webScreenLayout: WebScreen()));
+
                   }
                 },
                 child: Container(
