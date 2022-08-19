@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instagram/models/user_model.dart';
 import 'package:instagram/providers/user_provider.dart';
 import 'package:instagram/screens/add_post_screen.dart';
+import 'package:instagram/screens/feed_screen.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +38,7 @@ void onTapped(int index){
     return Scaffold(
       body:PageView(
         children: [
-          Text('Home'),
+          FeedScreen(),
           Text('Search'),
           AddPostScreen(),
           Text('like'),
