@@ -50,6 +50,8 @@ dev_dependencies:
   firebase_storage: ^10.3.5
   cloud_firestore: ^3.4.4
   flutter_svg: ^1.1.4
+  image_picker: ^0.8.5+3
+
 
 
 
