@@ -5,8 +5,8 @@ class UserModel {
   String? id;
   String? email;
   String? photoUrl;
-  List<String>? followers;
-  List<String>? followings;
+  List? followers;
+  List? followings;
 
   UserModel({
     this.userName,

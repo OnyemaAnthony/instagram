@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram/models/user_model.dart';
 import 'package:instagram/resources/auth_methos.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram/screens/login_screen.dart';
 import 'package:instagram/screens/web_screen.dart';
 import 'package:instagram/utils/utils.dart';
 import '../responsive/responsive_layout_screen.dart';
@@ -119,12 +120,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                   Container(
-                    child: const Text("Don't have an account?"),),
+                   const Text("Don't have an account?"),
 
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: const Text("Sign Up"),),
+                  GestureDetector(
+                    onTap: (){
+                      push(context, const LoginScreen());
+
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: const Text("Sign Up"),),
+                  ),
                 ],
               )
 

@@ -8,6 +8,12 @@ import 'package:instagram/resources/storage_methos.dart';
 class AuthMethods{
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Future<UserModel> getUserData()async{
+    User? currentUser = _auth.currentUser;
+    DocumentSnapshot snapshot = await _firestore.collection('Users').doc(currentUser!.uid).get();
+    return UserModel.fromMap(snapshot.data());
+
+  }
 
   
   Future<String> signUpUser(UserModel user,Uint8List file)async{
