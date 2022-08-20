@@ -33,15 +33,15 @@ class PostModel {
     return data;
   }
 
-  PostModel.fromMap(dynamic data){
-    //id = data.reference.id;
-    descriptions = data['description'];
-    userName = data['userName'];
-    createdAt= data['createdAt'];
-    profileImage = data['profileImages'];
-    likes = data['likes'];
-    photoUrl = data['photoUrl'];
-    postId = data['postId'];
-    userId = data['userId'];
+  PostModel.fromMap(DocumentSnapshot<Map<String,dynamic>> data){
+    id = data.id;
+    descriptions = data.data()!['description'];
+    userName = data.data()!['userName'];
+    createdAt= data.data()!['createdAt'];
+    profileImage = data.data()!['profileImages'];
+    likes = data.data()!['likes'];
+    photoUrl = data.data()!['photoUrl'];
+    postId = data.data()!['postId'];
+    userId = data.data()!['userId'];
   }
 }

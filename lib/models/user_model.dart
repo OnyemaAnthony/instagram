@@ -31,7 +31,7 @@ class UserModel {
     return user;
   }
   UserModel.fromMap(DocumentSnapshot<Map<String,dynamic>> user){
-    id = user.data()!['id'];
+    id = user.id;
     userName = user.data()!['userName'];
     bio = user.data()!['bio'];
     email = user.data()!['email'];
