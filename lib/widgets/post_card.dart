@@ -3,7 +3,9 @@ import 'package:instagram/models/post_Model.dart';
 import 'package:instagram/models/user_model.dart';
 import 'package:instagram/providers/user_provider.dart';
 import 'package:instagram/resources/firestore_methos.dart';
+import 'package:instagram/screens/commet_screen.dart';
 import 'package:instagram/screens/like_animation.dart';
+import 'package:instagram/utils/utils.dart';
 import '../utils/colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:provider/provider.dart';
@@ -134,7 +136,9 @@ class _PostCardState extends State<PostCard> {
                     ):const Icon(Icons.favorite_border)),
               ),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    push(context,CommentScreen() );
+                  },
                   icon: const Icon(
                     Icons.comment_outlined,
                   )),
@@ -185,7 +189,7 @@ class _PostCardState extends State<PostCard> {
                     padding: const EdgeInsets.symmetric(
                       vertical: 14,
                     ),
-                    child: Text(
+                    child: const Text(
                       'View all 200 comments',
                       style: TextStyle(
                         fontSize: 16,
