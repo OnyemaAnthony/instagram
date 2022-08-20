@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/models/post_Model.dart';
+import 'package:instagram/models/user_model.dart';
+import 'package:instagram/providers/user_provider.dart';
+import 'package:instagram/screens/like_animation.dart';
 import '../utils/colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:provider/provider.dart';
 
-class PostCard extends StatelessWidget {
+class PostCard extends StatefulWidget {
   PostModel? post;
-  PostCard({Key? key,this.post}) : super(key: key);
+
+  PostCard({Key? key, this.post}) : super(key: key);
 
   @override
+  State<PostCard> createState() => _PostCardState();
+}
+
+class _PostCardState extends State<PostCard> {
+  bool isLikeAnimating = false;
+  
+  @override
   Widget build(BuildContext context) {
+    print('the animatiing value is ${isLikeAnimating} ');
+    UserModel user = Provider.of<UserProvider>(context).getUser;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
@@ -23,7 +37,7 @@ class PostCard extends StatelessWidget {
                 CircleAvatar(
                   radius: 16,
                   backgroundImage: NetworkImage(
-                    post!.profileImage!,
+                    widget.post!.profileImage!,
                   ),
                 ),
                 Expanded(
@@ -34,8 +48,8 @@ class PostCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          post!.userName!,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          widget.post!.userName!,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
                     ),
@@ -70,23 +84,51 @@ class PostCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.35,
-            width: double.infinity,
-            child: Image.network(
-             // 'https://images.unsplash.com/photo-1660850889008-e26c9fd0772c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80',
-              post!.photoUrl!,
-              fit: BoxFit.cover,
+          GestureDetector(
+            onDoubleTap: (){
+              setState(() {
+                isLikeAnimating = true;
+              });
+            },
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.35,
+                  width: double.infinity,
+                  child: Image.network(
+                    // 'https://images.unsplash.com/photo-1660850889008-e26c9fd0772c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80',
+                    widget.post!.photoUrl!,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                AnimatedOpacity(
+                  duration: const Duration(milliseconds: 200),
+                  opacity: isLikeAnimating? 1:0,
+                  onEnd: (){
+                    setState(() {
+                      isLikeAnimating =false;
+                    });
+                  },
+                  child: LikeAnimation(child: const Icon(Icons.favorite,color: Colors.white,size: 120,), isAnimation: isLikeAnimating,
+                  duration: const Duration(milliseconds: 400),
+                  ),
+                )
+              ],
             ),
           ),
           Row(
             children: [
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  )),
+              LikeAnimation(
+                isAnimation: widget.post!.likes!.contains(user.id),
+                smallLike: true,
+                child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                    )),
+              ),
               IconButton(
                   onPressed: () {},
                   icon: const Icon(
@@ -114,21 +156,21 @@ class PostCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.subtitle2!.copyWith(
                           fontWeight: FontWeight.w800,
                         ),
-                    child: Text('${post!.likes!.length}likes',
+                    child: Text('${widget.post!.likes!.length}likes',
                         style: Theme.of(context).textTheme.bodyText2)),
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.only(top: 8),
                   child: RichText(
-                    text:  TextSpan(
+                    text: TextSpan(
                         style: const TextStyle(color: Colors.white),
                         children: [
                           TextSpan(
-                            text: post!.userName,
+                            text: widget.post!.userName,
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           TextSpan(
-                            text: ' ${post!.descriptions}',
+                            text: ' ${widget.post!.descriptions}',
                           ),
                         ]),
                   ),
@@ -148,19 +190,16 @@ class PostCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  child: Text(
-                    timeago.format(DateTime.parse(post!.createdAt!)),
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: secondaryColor,
-                    ),
+                Text(
+                  timeago.format(DateTime.parse(widget.post!.createdAt!)),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: secondaryColor,
                   ),
                 ),
               ],
             ),
           ),
-
         ],
       ),
       color: mobileBackgroundColor,

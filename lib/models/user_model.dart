@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 class UserModel {
   String? userName;
   String? bio;
@@ -29,13 +30,13 @@ class UserModel {
     user['followings']= followings;
     return user;
   }
-  UserModel.fromMap(dynamic user){
-    id = user['id'];
-    userName = user['userName'];
-    bio = user['bio'];
-    email = user['email'];
-    photoUrl = user['photoUrl'];
-    followers = user['followers'];
-    followings = user['followings'];
+  UserModel.fromMap(DocumentSnapshot<Map<String,dynamic>> user){
+    id = user.data()!['id'];
+    userName = user.data()!['userName'];
+    bio = user.data()!['bio'];
+    email = user.data()!['email'];
+    photoUrl = user.data()!['photoUrl'];
+    followers = user.data()!['followers'];
+    followings = user.data()!['followings'];
   }
 }
