@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/models/post_Model.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instagram/widgets/post_card.dart';
 class FeedScreen extends StatelessWidget {
   const FeedScreen({Key? key}) : super(key: key);
@@ -18,7 +20,25 @@ class FeedScreen extends StatelessWidget {
           }, icon: const Icon(Icons.messenger_outline_rounded)),
         ],
       ),
-      body: PostCard(),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('Posts').snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot<Map<String,dynamic>>> snapshot){
+          if(snapshot.connectionState == ConnectionState.waiting){
+            return const Center(child: CircularProgressIndicator(),);
+          }
+          return ListView.builder(
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (context,index){
+              List<PostModel> posts = snapshot.data!.docs.map((e)=>PostModel.fromMap(e.data())).toList();
+              PostModel post = posts[index];
+              return PostCard(
+                post: post,
+              );
+            },
+          );
+
+        },
+      ),
     );
   }
 }
