@@ -4,8 +4,9 @@ import 'package:instagram/models/user_model.dart';
 import 'package:instagram/providers/user_provider.dart';
 import 'package:instagram/resources/firestore_methos.dart';
 import 'package:instagram/utils/colors.dart';
+import 'package:instagram/widgets/comment_card.dart';
 import 'package:provider/provider.dart';
-import '../widgets/comment_card.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CommentScreen extends StatefulWidget {
   String? postId;
@@ -28,7 +29,28 @@ class _CommentScreenState extends State<CommentScreen> {
         title: const Text('Comments'),
         centerTitle: false,
       ),
-      body: CommentCard(),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('Posts')
+            .doc(widget.postId)
+            .collection('Comments')
+            .snapshots(),
+        builder: (context,AsyncSnapshot<QuerySnapshot<Map<String,dynamic>>> snapshot){
+          if(snapshot.connectionState == ConnectionState.waiting){
+            return const Center(child: CircularProgressIndicator(),);
+          }
+          return ListView.builder(
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (context,index){
+              List<CommentModel> comments = snapshot.data!.docs.map((e)=>CommentModel.fromMap(e)).toList();
+
+              CommentModel comment = comments[index];
+              return comment != null? CommentCard(comment:comment):Container();
+
+            },
+          );
+        },
+      ),
       bottomNavigationBar: SafeArea(
         child: Container(
           height: kToolbarHeight,
@@ -69,6 +91,7 @@ class _CommentScreenState extends State<CommentScreen> {
                       updatedAt: DateTime.now().toString(),
                     ),
                   );
+                  commentController.text = '';
                 },
                 child: Container(
                   padding:

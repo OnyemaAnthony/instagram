@@ -9,7 +9,7 @@ import 'package:instagram/utils/utils.dart';
 import '../utils/colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:provider/provider.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 class PostCard extends StatefulWidget {
   PostModel? post;
 
@@ -19,12 +19,33 @@ class PostCard extends StatefulWidget {
   State<PostCard> createState() => _PostCardState();
 }
 
+
 class _PostCardState extends State<PostCard> {
   bool isLikeAnimating = false;
-  
+  int numberOfComment = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    getComment();
+  }
+
+  void getComment()async{
+    try {
+      QuerySnapshot snapshot  =await FirebaseFirestore.instance.collection('Posts').doc(widget.post!.id).collection('Comments').get();
+      numberOfComment = snapshot.docs.length;
+
+    } catch (e) {
+      print(e.toString());
+    }
+   setState(() {
+
+   });
+  }
+
   @override
   Widget build(BuildContext context) {
-    UserModel user = Provider.of<UserProvider>(context).getUser;
+    UserModel? user = Provider.of<UserProvider>(context).getUser;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
@@ -189,9 +210,9 @@ class _PostCardState extends State<PostCard> {
                     padding: const EdgeInsets.symmetric(
                       vertical: 14,
                     ),
-                    child: const Text(
-                      'View all 200 comments',
-                      style: TextStyle(
+                    child:  Text(
+                      'View all $numberOfComment comments',
+                      style: const TextStyle(
                         fontSize: 16,
                         color: secondaryColor,
                       ),

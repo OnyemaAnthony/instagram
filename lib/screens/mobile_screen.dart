@@ -6,6 +6,8 @@ import 'package:instagram/models/user_model.dart';
 import 'package:instagram/providers/user_provider.dart';
 import 'package:instagram/screens/add_post_screen.dart';
 import 'package:instagram/screens/feed_screen.dart';
+import 'package:instagram/screens/profile_screen.dart';
+import 'package:instagram/screens/search_screen.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -37,12 +39,12 @@ void onTapped(int index){
    // UserModel user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
       body:PageView(
-        children: [
+        children: const [
           FeedScreen(),
-          Text('Search'),
+          SearchScreen(),
           AddPostScreen(),
           Text('like'),
-          Text('User'),
+          ProfileScreen(),
 
         ],
         controller: pageController,
