@@ -26,17 +26,20 @@ class FeedScreen extends StatelessWidget {
           if(snapshot.connectionState == ConnectionState.waiting){
             return const Center(child: CircularProgressIndicator(),);
           }
-          return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (context,index){
-              List<PostModel> posts = snapshot.data!.docs.map((e)=>PostModel.fromMap(e)).toList();
-              PostModel post = posts[index];
-              return PostCard(
-                post: post,
-              );
-            },
-          );
+          if(snapshot.hasData){
+            return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context,index){
+                List<PostModel> posts = snapshot.data!.docs.map((e)=>PostModel.fromMap(e)).toList();
+                PostModel? post = posts[index];
+                return PostCard(
+                  post: post,
+                );
+              },
+            );
 
+          }
+           return Container();
         },
       ),
     );

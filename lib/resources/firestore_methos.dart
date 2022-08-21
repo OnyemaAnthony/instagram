@@ -42,4 +42,5 @@ class FirestoreMethos {
       print(e.toString());
     }
   }
+  Future<String>postComment(String postId,String comment,)
 }
