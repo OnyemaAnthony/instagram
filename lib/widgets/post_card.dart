@@ -137,7 +137,7 @@ class _PostCardState extends State<PostCard> {
               ),
               IconButton(
                   onPressed: () {
-                    push(context,CommentScreen() );
+                    push(context,CommentScreen(postId: widget.post!.id,) );
                   },
                   icon: const Icon(
                     Icons.comment_outlined,

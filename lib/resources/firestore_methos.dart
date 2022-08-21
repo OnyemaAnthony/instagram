@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:instagram/models/comment_model.dart';
 import 'package:instagram/models/post_Model.dart';
 import 'package:instagram/resources/storage_methos.dart';
 import 'package:uuid/uuid.dart';
@@ -42,5 +43,14 @@ class FirestoreMethos {
       print(e.toString());
     }
   }
-  Future<String>postComment(String postId,String comment,)
+  Future<void>postComment(CommentModel comment)async {
+    try{
+      if(comment.comment!.isNotEmpty){
+        String commentId = const Uuid().v1();
+        _firestore.collection('Posts').doc(comment.postId).collection('Comments').doc(commentId).set(comment.toMap());
+      }
+    }catch(e){
+      print(e.toString());
+    }
+  }
 }

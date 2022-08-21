@@ -15,6 +15,8 @@ class CommentModel {
     this.userId,
     this.name,
     this.profilePicture,
+    this.createdAt,
+    this.updatedAt,
   });
 
   Map<String,dynamic>toMap(){
