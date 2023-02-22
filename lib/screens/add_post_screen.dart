@@ -90,10 +90,10 @@ void clear(){
         setState(() {
           _isLoading = false;
         });
-        showSnackBar('$response', context);
+        showSnackBar(response, context);
       }
     } catch (e) {
-      showSnackBar('${e.toString()}', context);
+      showSnackBar(e.toString(), context);
 
     }
   }
