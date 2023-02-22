@@ -15,7 +15,6 @@ class AuthMethods{
 
   }
 
-  
   Future<String> signUpUser(UserModel user,Uint8List file)async{
     String result = 'some error occured';
     try{

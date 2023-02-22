@@ -7,7 +7,7 @@ import 'package:instagram/resources/storage_methos.dart';
 import 'package:uuid/uuid.dart';
 
 class FirestoreMethos {
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<String> uploadPost(PostModel post, Uint8List file) async {
     String result = 'error occured';
