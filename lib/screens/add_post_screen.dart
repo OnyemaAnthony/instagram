@@ -145,7 +145,6 @@ void clear(){
                   children: [
                     CircleAvatar(
                       backgroundImage: NetworkImage(
-                        //'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=986&q=80',
                         user.photoUrl!,
                       ),
                     ),
