@@ -32,7 +32,6 @@ class FeedScreen extends StatelessWidget {
               itemBuilder: (context,index){
                 List<PostModel> posts = snapshot.data!.docs.map((e)=>PostModel.fromMap(e)).toList();
                 PostModel? post = posts[index];
-               // return Text('hello world ${post.userName}');
                 return  PostCard(
                   post: post,
                 );
