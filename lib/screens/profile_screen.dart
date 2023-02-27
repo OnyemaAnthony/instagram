@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/utils/colors.dart';
-
 import '../widgets/follow_button.dart';
 
 class ProfileScreen extends StatefulWidget {
