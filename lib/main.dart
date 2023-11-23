@@ -35,8 +35,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Instagram',
-        theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
-        //home: const ResponsiveLayoutScreen(mobileScreenLayout: MobileScreen(),webScreenLayout: WebScreen(),),
+        theme: ThemeData.dark(),
         home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context,snapshot){
