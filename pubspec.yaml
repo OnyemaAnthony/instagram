@@ -60,8 +60,6 @@ flutter:
     - assets/
 
 
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
 
