@@ -43,7 +43,7 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
 
-  # The following line ensures that the Material Icons font is
+
   # the material Icons class.
   uses-material-design: true
 
