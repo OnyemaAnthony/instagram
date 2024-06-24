@@ -56,8 +56,8 @@ flutter:
 
 
 l
-  # example:
-  # fonts:
+
+  # rrfonts:
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
