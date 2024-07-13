@@ -57,7 +57,7 @@ flutter:
 
 l
 
-  # rrfonts:
+  
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
@@ -69,5 +69,4 @@ l
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
-
   # see https://flutter.dev/custom-fonts/#from-packages
