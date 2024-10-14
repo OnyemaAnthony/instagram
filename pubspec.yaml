@@ -1,5 +1,5 @@
 name: instagram
-description: A new Flutter project
+description: A new  project
 
 
 publish_to: 'none' 
@@ -59,7 +59,7 @@ l
   
 
   #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyleruu-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
